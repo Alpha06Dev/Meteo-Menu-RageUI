@@ -312,7 +312,22 @@ function RageUI.PoolMenus:Example()
 		Items:AddButton("Mettre la neige au sol", "Appuyez sur ENTRER pour valider", { IsDisabled = false }, function(onSelected)
 			if (onSelected) then
 				SetWeatherTypeOverTime('XMAS', 15.0)
+				SetForceVehicleTrails(true) -- Enable vehicle tire trails/tracks
+        		SetForcePedFootstepsTracks(true)
+				RequestScriptAudioBank("ICE_FOOTSTEPS", false)
+                RequestScriptAudioBank("SNOW_FOOTSTEPS", false)
+                RequestNamedPtfxAsset("core_snow")
+				UseParticleFxAssetNextCall("core_snow")
 				ShowNotification('Météo actuel : ~y~Enneigée')
+				end
+		end)
+
+		Items:AddButton("Retirer la neige au sol", "Appuyez sur ENTRER pour valider", { IsDisabled = false }, function(onSelected)
+			if (onSelected) then
+				SetForceVehicleTrails(false) -- Enable vehicle tire trails/tracks
+        		SetForcePedFootstepsTracks(false)
+				SetWeatherTypeOverTime('EXTRASUNNY', 15.0)
+				ShowNotification('Météo actuel : ~y~Normal')
 				end
 		end)
 	end, function()
